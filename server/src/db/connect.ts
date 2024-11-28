@@ -1,10 +1,7 @@
 import mongoose, { ConnectOptions } from "mongoose";
 
 export const connectDB = async (url: string) => {
-  return mongoose.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  } as ConnectOptions);
+  return mongoose.connect(url, {} as ConnectOptions);
 };
 
 export const configDb = () => {

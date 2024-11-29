@@ -46,30 +46,14 @@
     "ts-node": "^10.9.1"
   },
   "_moduleAliases": {
-    "@utils": 
-      "./src/utils"
-    ,
-    "@models": 
-      "./src/models"
-    ,
-    "@interface": 
-      "./src/interface"
-    ,
-    "@controllers": 
-      "./src/controllers"
-    ,
-    "@middleware": 
-      "./src/middleware"
-    ,
-    "@db": 
-      "./src/db"
-    ,
-    "@exceptions": 
-      "./src/exceptions"
-    ,
-    "@routes": 
-      "./src/routes"
-    
+    "@utils": "dist/utils",
+    "@models": "dist/models",
+    "@interface": "dist/interface",
+    "@controllers": "dist/controllers",
+    "@middleware": "dist/middleware",
+    "@db": "dist/db",
+    "@exceptions": "dist/exceptions",
+    "@routes": "dist/routes"
   },
   "engines": {
     "node": "16.x"

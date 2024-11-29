@@ -1,8 +1,8 @@
+import { UserRequest } from "@interface/user";
 import dotenv from "dotenv";
 import { NextFunction, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
-import { UserRequest } from "../types/user";
 dotenv.config();
 
 interface JwtPayload {
@@ -25,12 +25,11 @@ const auth = async (req: UserRequest, res: Response, next: NextFunction) => {
       req.user = { userId: payload?.id, email: payload?.email };
       next();
     } catch (_) {
-      res
-        .status(StatusCodes.NOT_FOUND)
-        .json({
-          message: "Authentication invalid: Please log in to access this resource.",
-          status: StatusCodes.NOT_FOUND,
-        });
+      res.status(StatusCodes.NOT_FOUND).json({
+        message:
+          "Authentication invalid: Please log in to access this resource.",
+        status: StatusCodes.NOT_FOUND,
+      });
     }
   }
 };

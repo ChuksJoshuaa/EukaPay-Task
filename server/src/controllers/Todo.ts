@@ -1,7 +1,7 @@
+import { UserRequest } from "@interface/user";
+import Todo from "@models/Todo";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import Todo from "../models/Todo";
-import { UserRequest } from "../types/user";
 
 export const getAllTodos = async (_: Request, res: Response) => {
   try {

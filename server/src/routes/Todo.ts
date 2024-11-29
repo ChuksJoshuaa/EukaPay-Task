@@ -1,6 +1,6 @@
 import express from "express";
-import { createTodo, getAllUserTodo, getAllTodos, updateTodo, deleteTodo } from "../controllers/Todo";
-import auth from "../middleware/auth";
+import { createTodo, getAllUserTodo, getAllTodos, updateTodo, deleteTodo } from "@controllers/Todo";
+import auth from "@middleware/auth";
 
 const router = express();
 

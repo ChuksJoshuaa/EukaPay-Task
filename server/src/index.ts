@@ -1,14 +1,16 @@
+import "module-alias/register";
+
+import { connectDB } from "@db/connect";
+import errorHandlerMiddleware from "@middleware/error-handler";
+import notFound from "@middleware/not-found";
+import todoRoutes from "@routes/Todo";
+import userRoutes from "@routes/User";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import rateLimiter from "express-rate-limit";
 import helmet from "helmet";
-import { connectDB } from "./db/connect";
-import errorHandlerMiddleware from "./middleware/error-handler";
-import notFound from "./middleware/not-found";
-import userRoutes from "./routes/User";
-import todoRoutes from "./routes/Todo";
 dotenv.config();
 
 const app = express();
@@ -22,7 +24,7 @@ app.use(helmet());
 app.set("trust proxy", 1);
 app.use(
   rateLimiter({
-    windowMs: 15 * 60 * 1000, 
+    windowMs: 15 * 60 * 1000,
     max: 100,
   })
 );
@@ -33,7 +35,6 @@ app.get("/", (_, res) => {
 //Authentication Route
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/todos", todoRoutes);
-
 
 //Error routes
 app.use(notFound);

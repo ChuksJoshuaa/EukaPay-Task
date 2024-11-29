@@ -1,5 +1,5 @@
+import { getEmailValidator, getPasswordValidators } from "@utils/validations";
 import Mongoose from "mongoose";
-import { getEmailValidator, getPasswordValidators } from "../utils/validations";
 
 
 const userSchema = new Mongoose.Schema({

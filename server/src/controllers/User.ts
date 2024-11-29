@@ -1,9 +1,9 @@
+import User from "@models/User";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
-import User from "../models/User";
 dotenv.config();
 
 export const signin = async (req: Request, res: Response) => {

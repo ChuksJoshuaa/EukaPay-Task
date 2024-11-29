@@ -1,5 +1,5 @@
+import HttpException from "@exceptions/httpExceptions";
 import { Request, Response } from "express";
-import HttpException from "../exceptions/httpExceptions";
 import { StatusCodes } from "http-status-codes";
 
 const errorHandlerMiddleware = (

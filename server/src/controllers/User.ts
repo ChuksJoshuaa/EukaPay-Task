@@ -12,18 +12,29 @@ export const signin = async (req: Request, res: Response) => {
     if (!email || !password) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ status: "ok", msg: "Please provide email and password" });
+        .json({
+          status: StatusCodes.BAD_REQUEST,
+          message: "Please provide email and password",
+        });
     }
 
     const oldUser = await User.findOne({ email });
     if (!oldUser) {
-      return res.status(StatusCodes.NOT_FOUND).json({ msg: "User does not exist" });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({
+          message: "User does not exist",
+          status: StatusCodes.NOT_FOUND,
+        });
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
 
     if (!isPasswordCorrect) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ msg: "Invalid Credentials" });
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "Invalid Credentials",
+        status: StatusCodes.BAD_REQUEST,
+      });
     }
     const token = jwt.sign(
       {
@@ -38,18 +49,21 @@ export const signin = async (req: Request, res: Response) => {
     );
     return res.status(StatusCodes.OK).json({ result: oldUser, token });
   } catch (error) {
-    return res.status(StatusCodes.NOT_FOUND).json({ msg: error.msg });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: error.message, status: error.status });
   }
 };
 
 export const signup = async (req: Request, res: Response) => {
-  const { email, firstName, lastName, password } =
-    req.body;
+  const { email, firstName, lastName, password } = req.body;
 
   try {
     const oldUser = await User.findOne({ email });
     if (oldUser) {
-      return res.status(StatusCodes.NOT_FOUND).json({ msg: "User already exist" });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "User already exist", status: StatusCodes.NOT_FOUND });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -58,7 +72,7 @@ export const signup = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       firstName,
-      lastName
+      lastName,
     });
 
     const token = jwt.sign(
@@ -69,6 +83,8 @@ export const signup = async (req: Request, res: Response) => {
 
     return res.status(StatusCodes.OK).json({ result, token });
   } catch (error) {
-    return res.status(StatusCodes.NOT_FOUND).json({ msg: error.msg });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: error.message, status: error.status });
   }
 };

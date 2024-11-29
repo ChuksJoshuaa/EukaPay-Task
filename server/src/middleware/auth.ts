@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
-import HttpException from "../exceptions/httpExceptions";
+import { UserRequest } from "../types/user";
 dotenv.config();
 
 interface JwtPayload {
@@ -10,30 +10,29 @@ interface JwtPayload {
   email: string;
 }
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: { userId: string; email: string; }
-    }
-  }
-}
-
-const auth = async (req: Request, res: Response, next: NextFunction) => {
-   const authHeader = req.headers.authorization;
+const auth = async (req: UserRequest, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer")) {
-    throw new HttpException(StatusCodes.NOT_FOUND, "Authenticated invalid");
-  }
-  const token = authHeader.split(" ")[1];
+    res.status(StatusCodes.NOT_FOUND).json({
+      message: "Authentication invalid: Please log in to access this resource.",
+      status: StatusCodes.NOT_FOUND,
+    });
+  } else {
+    const token = authHeader.split(" ")[1];
 
-  try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
-    req.user = { userId: payload?.id, email: payload?.email }
-    next();
-  } catch (error) {
-    throw new HttpException(StatusCodes.NOT_FOUND, "Authenticated invalid");
+    try {
+      const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+      req.user = { userId: payload?.id, email: payload?.email };
+      next();
+    } catch (_) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({
+          message: "Authentication invalid: Please log in to access this resource.",
+          status: StatusCodes.NOT_FOUND,
+        });
+    }
   }
 };
 
-
 export default auth;
-

@@ -24,4 +24,4 @@ const TodoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Blog", TodoSchema);
+export default mongoose.model("Todo", TodoSchema);

@@ -8,6 +8,7 @@ import { connectDB } from "./db/connect";
 import errorHandlerMiddleware from "./middleware/error-handler";
 import notFound from "./middleware/not-found";
 import userRoutes from "./routes/User";
+import todoRoutes from "./routes/Todo";
 dotenv.config();
 
 const app = express();
@@ -31,6 +32,7 @@ app.get("/", (_, res) => {
 
 //Authentication Route
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/todos", todoRoutes);
 
 
 //Error routes

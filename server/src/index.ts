@@ -20,7 +20,6 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use(helmet());
 
-//Extra packages
 app.set("trust proxy", 1);
 app.use(
   rateLimiter({
@@ -32,11 +31,9 @@ app.get("/", (_, res) => {
   res.send("Api working perfectly");
 });
 
-//Authentication Route
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/todos", todoRoutes);
 
-//Error routes
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 

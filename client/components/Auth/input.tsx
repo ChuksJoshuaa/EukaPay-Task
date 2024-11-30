@@ -23,7 +23,6 @@ const Input = ({
         variant="outlined"
         required
         fullWidth
-        // error={!name}
         label={label}
         autoFocus={autoFocus}
         type={type}

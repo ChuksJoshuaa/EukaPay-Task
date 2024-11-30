@@ -5,12 +5,12 @@ import useStyles from "@/components/Auth/styles";
 import useAuth from "@/components/Auth/useAuth";
 import Layout from "@/components/Layout";
 import {
-    Avatar,
-    Button,
-    Container,
-    Grid,
-    Paper,
-    Typography,
+  Avatar,
+  Button,
+  Container,
+  Grid,
+  Paper,
+  Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import LoadingButton from "@mui/lab/LoadingButton";

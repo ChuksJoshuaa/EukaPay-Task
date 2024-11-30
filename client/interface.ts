@@ -20,6 +20,7 @@ export interface InputProps {
   label: string;
   type: string;
   handleShowPassword?: () => void;
+  isError?: boolean;
 }
 
 export interface User {

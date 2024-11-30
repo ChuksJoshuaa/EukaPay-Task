@@ -14,6 +14,7 @@ const Input = ({
   label,
   type,
   handleShowPassword,
+  isError
 }: InputProps) => {
   return (
     <Grid item xs={12} sm={half ? 6 : 12}>
@@ -23,6 +24,7 @@ const Input = ({
         variant="outlined"
         required
         fullWidth
+        error={isError}
         label={label}
         autoFocus={autoFocus}
         type={type}

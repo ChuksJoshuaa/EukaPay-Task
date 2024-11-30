@@ -26,36 +26,23 @@ const useAuth = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    if (isSignup) {
-      try {
-        const resp = await signUp(formData);
-        if (resp && "result" in resp) {
-          dispatch({ type: AUTH, payload: resp });
-          SuccessPopup("Account created successfully! Welcome aboard!");
-          router.push("/");
-        } else {
-          ErrorPopup(resp?.error?.message ?? "Sorry, an error occurred");
-        }
-      } catch (error) {
-        ErrorPopup("Sorry, an error occurred");
-      } finally {
-        setLoading(false);
+    const postType = isSignup ? signUp(formData) : signIn(formData);
+    const successMessage = isSignup
+      ? "Account created successfully! Welcome aboard!"
+      : "Welcome back! You've successfully logged in.";
+    try {
+      const resp = await postType;
+      if (resp && "result" in resp) {
+        dispatch({ type: AUTH, payload: resp });
+        SuccessPopup(successMessage);
+        router.push("/");
+      } else {
+        ErrorPopup(resp?.error?.message ?? "Sorry, an error occurred");
       }
-    } else {
-      try {
-        const resp = await signIn(formData);
-        if (resp && "result" in resp) {
-          dispatch({ type: AUTH, payload: resp });
-          SuccessPopup("Welcome back! You've successfully logged in.");
-          router.push("/");
-        } else {
-          ErrorPopup(resp?.error?.message ?? "Sorry, an error occurred");
-        }
-      } catch (error) {
-        ErrorPopup("Sorry, an error occurred");
-      } finally {
-        setLoading(false);
-      }
+    } catch (error) {
+      ErrorPopup("Sorry, an error occurred");
+    } finally {
+      setLoading(false);
     }
   };
 

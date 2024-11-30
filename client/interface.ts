@@ -21,6 +21,7 @@ export interface InputProps {
   type: string;
   handleShowPassword?: () => void;
   isError?: boolean;
+  value?: string;
 }
 
 export interface User {
@@ -56,4 +57,4 @@ export type AppAction =
   | { type: typeof OPENSIDEBAR; payload: boolean }
   | { type: typeof SETSCREEN; payload: number }
   | { type: typeof AUTH; payload: AuthResponse | null }
-  | { type: typeof LOGOUT}
+  | { type: typeof LOGOUT };

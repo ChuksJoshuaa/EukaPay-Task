@@ -14,7 +14,8 @@ const Input = ({
   label,
   type,
   handleShowPassword,
-  isError
+  isError,
+  value
 }: InputProps) => {
   return (
     <Grid item xs={12} sm={half ? 6 : 12}>
@@ -22,6 +23,7 @@ const Input = ({
         name={name}
         onChange={handleChange}
         variant="outlined"
+        value={value ?? undefined}
         required
         fullWidth
         error={isError}

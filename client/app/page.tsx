@@ -1,10 +1,38 @@
 "use client";
 
+import HomeView from "@/components/Home";
+import InputView from "@/components/Home/input";
+import useStyles from "@/components/Home/styles";
 import Layout from "@/components/Layout";
+import { Grid } from "@material-ui/core";
+import { AppBar, Container } from "@mui/material";
 const Home = () => {
+  const classes = useStyles();
+
   return (
     <Layout>
-      <h3>Home</h3>
+      <Container maxWidth="xl">
+        <Grid
+          container
+          className={classes.gridContainer}
+          justifyContent="space-between"
+          alignItems="stretch"
+          spacing={3}
+        >
+          <Grid item xs={12} sm={6} md={3}>
+            <AppBar
+              className={classes.appBarSearch}
+              position="static"
+              color="inherit"
+            >
+              <InputView />
+            </AppBar>
+          </Grid>
+          <Grid item xs={12} sm={6} md={9}>
+            <HomeView />
+          </Grid>
+        </Grid>
+      </Container>
     </Layout>
   );
 };

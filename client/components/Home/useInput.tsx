@@ -1,11 +1,18 @@
-import { createTodo, deleteTodo, fetchAllTodos } from "@/api";
+import {
+  createTodo,
+  deleteTodo,
+  fetchAllTodos,
+  fetchUserSingleTodo,
+  updateTodo,
+} from "@/api";
 import { FETCH_ALL_TODO } from "@/constants";
 import MyContext from "@/contexts";
 import { TodoProps } from "@/interface";
 import { getUserData } from "@/utils/localStorage";
 import { ErrorPopup, SuccessPopup } from "@/utils/notification";
 import { format } from "date-fns";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 
 const useInput = () => {
@@ -18,6 +25,7 @@ const useInput = () => {
   const [unfinishedChecked, setUnfinishedChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isTodoFetching, setIsTodoFetching] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -46,6 +54,27 @@ const useInput = () => {
       const resp = await fetchAllTodos();
       if (resp && "data" in resp) {
         dispatch({ type: FETCH_ALL_TODO, payload: resp });
+      } else {
+        ErrorPopup(resp?.error?.message ?? "Sorry, an error occurred");
+      }
+    } catch (error) {
+      ErrorPopup("Sorry, an error occurred");
+    } finally {
+      setIsTodoFetching(false);
+    }
+  };
+
+  const handleFetchTodoById = async (id: string) => {
+    setIsTodoFetching(true);
+    try {
+      const resp = await fetchUserSingleTodo(id);
+      if (resp && "todo" in resp) {
+        const result = resp.todo;
+        setTitle(result?.title ?? "");
+        setDoneChecked(result?.status === "Done");
+        setUnfinishedChecked(result?.status === "Unfinished");
+        const dueDate = result?.dueDate ? new Date(result.dueDate) : null;
+        setDueDate(dueDate ? dayjs(dueDate) : null);
       } else {
         ErrorPopup(resp?.error?.message ?? "Sorry, an error occurred");
       }
@@ -102,6 +131,41 @@ const useInput = () => {
     }
   };
 
+  const handleUpdate = async (id: string) => {
+    setLoading(true);
+    const formData: TodoProps = {
+      title,
+      dueDate: formattedDate,
+      status: doneChecked ? "Done" : "Unfinished",
+    };
+    try {
+      const resp = await updateTodo(id, formData);
+      if (resp && "updatedTodo" in resp) {
+        SuccessPopup("Todo updated successfully");
+        setTitle("");
+        setDoneChecked(false);
+        setUnfinishedChecked(false);
+        setDueDate(null);
+        router.push("/");
+      } else {
+        ErrorPopup(resp?.error?.message ?? "Sorry, an error occurred");
+      }
+    } catch (error) {
+      ErrorPopup("Sorry, an error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEdit = (id: string, createdBy: string) => {
+    if (createdBy !== user?._id) {
+      ErrorPopup("You can only edit a todo that you have created.");
+      return;
+    }
+
+    router.push(`/edit/${id}`);
+  };
+
   return {
     handleChange,
     handleDoneChange,
@@ -117,6 +181,9 @@ const useInput = () => {
     handleFetchAllTodos,
     isTodoFetching,
     handleDeleteTodo,
+    handleEdit,
+    handleFetchTodoById,
+    handleUpdate,
   };
 };
 

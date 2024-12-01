@@ -12,7 +12,7 @@ import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { format } from "date-fns";
 
 const TableView = ({ rows }: TableViewProps) => {
-  const { handleDeleteTodo } = useInput();
+  const { handleDeleteTodo, handleEdit } = useInput();
   const columns: GridColDef[] = [
     {
       field: "status",
@@ -26,7 +26,12 @@ const TableView = ({ rows }: TableViewProps) => {
         />
       ),
     },
-    { field: "title", headerName: "Title", headerClassName: "status-header",width: 250 },
+    {
+      field: "title",
+      headerName: "Title",
+      headerClassName: "status-header",
+      width: 250,
+    },
     {
       field: "dueDate",
       headerName: "Due Date",
@@ -44,7 +49,10 @@ const TableView = ({ rows }: TableViewProps) => {
       width: 200,
       renderCell: (params: GridRenderCellParams) => (
         <Box>
-          <IconButton aria-label="edit">
+          <IconButton
+            aria-label="edit"
+            onClick={() => handleEdit(params.row._id, params.row.createdBy)}
+          >
             <EditIcon />
           </IconButton>
           <IconButton

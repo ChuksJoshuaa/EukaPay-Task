@@ -22,14 +22,15 @@ const Navbar = () => {
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
-      <Link href="/" className={classes.brandContainer}>
+      <Box className={classes.boxCover}>
+        <Link href="/" className={classes.brandContainer}>
         <img
           className={classes.image}
           src={imageUrl}
           alt="icon"
           height="45px"
         />
-        <Typography className={classes.heading} variant="h3" mx={2}>
+        <Typography className={classes.heading} variant="h3" mx={2} fontWeight={600} mt={1}>
           Todo
         </Typography>
       </Link>
@@ -43,7 +44,7 @@ const Navbar = () => {
             >
               {user?.firstName?.charAt(0)}
             </Avatar>
-            <Typography className={classes.userName} variant="h6">
+            <Typography className={classes.userName} variant="h6" marginRight={1}>
               {user?.firstName ?? ""} {user?.lastName ?? ""}
             </Typography>
             <Button
@@ -63,6 +64,7 @@ const Navbar = () => {
           </Link>
         )}
       </Toolbar>
+      </Box>
     </AppBar>
   );
 };

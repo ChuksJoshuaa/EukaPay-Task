@@ -32,17 +32,50 @@ export const getAllUserTodo = async (req: UserRequest, res: Response) => {
   }
 };
 
+export const getSingleUserTodo = async (req: UserRequest, res: Response) => {
+  try {
+    const userId = req?.user?.userId;
+    const { id } = req.params;
+
+    if (!userId) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "User not found", status: StatusCodes.NOT_FOUND });
+    } else {
+      const todo = await Todo.findOne({ _id: id, createdBy: userId });
+      if (!todo) {
+        res
+          .status(StatusCodes.NOT_FOUND)
+          .json({ message: "Todo not found", status: StatusCodes.NOT_FOUND });
+      } else {
+        res.status(StatusCodes.OK).json({ todo });
+      }
+    }
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "An error occurred", error: error.message });
+  }
+};
+
 export const createTodo = async (req: UserRequest, res: Response) => {
   const todo = req.body;
-  const { title, status, dueDate } = todo;
+  const { title, status } = todo;
   const userId = req?.user?.userId;
   try {
-    if (!title || !status || !dueDate) {
+    if (!title) {
       res.status(StatusCodes.BAD_REQUEST).json({
-        message: "All fields are required",
+        message: "Title field is required",
         status: StatusCodes.BAD_REQUEST,
       });
-    } else if (!userId) {
+    } 
+    else if (!status) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        message: "Status field is required",
+        status: StatusCodes.BAD_REQUEST,
+      });
+    } 
+    else if (!userId) {
       res
         .status(StatusCodes.NOT_FOUND)
         .json({ message: "User not found", status: StatusCodes.NOT_FOUND });
@@ -66,7 +99,7 @@ export const createTodo = async (req: UserRequest, res: Response) => {
 export const updateTodo = async (req: UserRequest, res: Response) => {
   const { id } = req.params;
   const todoUpdates = req.body;
-  const { title, status, dueDate } = todoUpdates;
+  const { title, status } = todoUpdates;
   const userId = req?.user?.userId;
 
   try {
@@ -85,12 +118,20 @@ export const updateTodo = async (req: UserRequest, res: Response) => {
           message: "You are not authorized to update this todo",
           status: StatusCodes.FORBIDDEN,
         });
-      } else if (!title || !status || !dueDate) {
+      }
+      else if (!title) {
         res.status(StatusCodes.BAD_REQUEST).json({
-          message: "All fields are required",
+          message: "Title field is required",
           status: StatusCodes.BAD_REQUEST,
         });
-      } else {
+      }
+      else if (!status) {
+        res.status(StatusCodes.BAD_REQUEST).json({
+          message: "Status field is required",
+          status: StatusCodes.BAD_REQUEST,
+        });
+      }
+      else {
         const updatedTodo = await Todo.findByIdAndUpdate(
           id,
           {

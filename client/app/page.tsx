@@ -6,9 +6,17 @@ import useStyles from "@/components/Home/styles";
 import Layout from "@/components/Layout";
 import { Grid } from "@material-ui/core";
 import { AppBar, Container } from "@mui/material";
+import { useEffect, useState } from "react";
 const Home = () => {
   const classes = useStyles();
+  const [isHydrated, setIsHydrated] = useState(true)
 
+  useEffect(() => {
+    setIsHydrated(false)
+  }, [])
+
+  if (isHydrated) return null
+  
   return (
     <Layout>
       <Container maxWidth="xl">

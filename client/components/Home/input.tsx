@@ -21,7 +21,8 @@ const input = () => {
     dueDate,
     setDueDate,
     title,
-    formattedDate,
+    loading,
+    handleSubmit
   } = useInput();
 
   return (
@@ -71,7 +72,7 @@ const input = () => {
               display="flex"
               justifyContent="flex-start"
               alignItems="center"
-              gap={1}
+              gap={0.1}
             >
               <BpCheckbox
                 checked={doneChecked}
@@ -84,7 +85,7 @@ const input = () => {
               display="flex"
               justifyContent="flex-start"
               alignItems="center"
-              gap={1}
+              gap={0.1}
             >
               <BpCheckbox
                 checked={unfinishedChecked}
@@ -104,9 +105,10 @@ const input = () => {
             color="primary"
             className={classes.submit}
             disabled={
-              !title || !formattedDate || !(doneChecked || unfinishedChecked)
+              !title || !(doneChecked || unfinishedChecked)
             }
-            //   loading={loading}
+            loading={loading}
+            onClick={handleSubmit}
           >
             <Typography
               variant="body1"

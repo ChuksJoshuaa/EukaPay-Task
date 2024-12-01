@@ -9,6 +9,9 @@ export const API_URL =
     : process.env.NEXT_PUBLIC_LIVE_API_URL;
 export const SIGNUP_URL = `${API_URL}/api/v1/user/register`;
 export const SIGNIN_URL = `${API_URL}/api/v1/user/login`;
+export const CREATE_URL = `${API_URL}/api/v1/todos/create`
+export const UPDATE_URL = `${API_URL}/api/v1/todos/update`
+export const DELETE_URL = `${API_URL}/api/v1/todos/delete`
 export const isWindow = typeof window !== "undefined"
 export const imageUrl =
   "https://res.cloudinary.com/chuksmbanaso/image/upload/v1732942217/images_topxoz.jpg";

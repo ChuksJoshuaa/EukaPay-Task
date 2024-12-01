@@ -1,5 +1,12 @@
-import { API_URL, SIGNIN_URL, SIGNUP_URL } from "@/constants";
-import { AuthState } from "@/interface";
+import {
+  API_URL,
+  CREATE_URL,
+  DELETE_URL,
+  SIGNIN_URL,
+  SIGNUP_URL,
+  UPDATE_URL,
+} from "@/constants";
+import { AuthState, TodoProps } from "@/interface";
 import { getToken } from "@/utils/localStorage";
 import axios from "axios";
 
@@ -36,4 +43,43 @@ export const signUp = async (FormData: AuthState) => {
       return { error: "An unexpected error occurred" };
     }
   }
-}
+};
+
+export const createTodo = async (FormData: TodoProps) => {
+  try {
+    const response = await API.post(CREATE_URL, FormData);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { error: error.response?.data || "An error occurred" };
+    } else {
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+export const updateTodo = async (id: string, FormData: TodoProps) => {
+  try {
+    const response = await API.patch(`${UPDATE_URL}/${id}`, FormData);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { error: error.response?.data || "An error occurred" };
+    } else {
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+export const deleteTodo = async (id: string) => {
+  try {
+    const response = await API.delete(`${DELETE_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { error: error.response?.data || "An error occurred" };
+    } else {
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};

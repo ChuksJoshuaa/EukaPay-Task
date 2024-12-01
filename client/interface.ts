@@ -58,3 +58,10 @@ export type AppAction =
   | { type: typeof SETSCREEN; payload: number }
   | { type: typeof AUTH; payload: AuthResponse | null }
   | { type: typeof LOGOUT };
+
+
+export interface TodoProps {
+  title: string;
+  status: "Done" | "Unfinished";
+  dueDate: string;
+}  

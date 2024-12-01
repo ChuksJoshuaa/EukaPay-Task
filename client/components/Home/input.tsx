@@ -21,6 +21,7 @@ const input = () => {
     dueDate,
     setDueDate,
     title,
+    formattedDate,
   } = useInput();
 
   return (
@@ -55,7 +56,6 @@ const input = () => {
             color="body1"
             fontWeight={500}
             marginLeft={0.5}
-            
           >
             Status
           </Typography>
@@ -65,7 +65,7 @@ const input = () => {
             alignItems="center"
             width={"100%"}
             gap={5}
-            mt={2}
+            mt={1}
           >
             <Box
               display="flex"
@@ -96,17 +96,26 @@ const input = () => {
           </Box>
         </Box>
 
-        <Box mt={3}>
+        <Box mt={2}>
           <LoadingButton
             type="button"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            //   disabled={loading}
+            disabled={
+              !title || !formattedDate || !(doneChecked || unfinishedChecked)
+            }
             //   loading={loading}
           >
-            Submit
+            <Typography
+              variant="body1"
+              textTransform={"capitalize"}
+              lineHeight={2}
+              fontWeight={600}
+            >
+              Create
+            </Typography>
           </LoadingButton>
         </Box>
       </React.Fragment>

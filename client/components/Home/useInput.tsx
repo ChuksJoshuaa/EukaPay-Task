@@ -104,6 +104,10 @@ const useInput = () => {
   };
 
   const handleSubmit = async () => {
+    if (!user?._id) {
+      ErrorPopup("Please login to create");
+      return;
+    }
     setLoading(true);
     const formData: TodoProps = {
       title,
@@ -132,6 +136,10 @@ const useInput = () => {
   };
 
   const handleUpdate = async (id: string) => {
+    if (!user?._id) {
+      ErrorPopup("Please login to update");
+      return;
+    }
     setLoading(true);
     const formData: TodoProps = {
       title,

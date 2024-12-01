@@ -1,6 +1,7 @@
 "use client";
 
 import useStyles from "@/components/Auth/styles";
+import { BpCheckbox } from "@/components/Checked";
 import useInput from "@/components/Home/useInput";
 import TextField from "@/components/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -8,7 +9,6 @@ import { Box, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
-import { BpCheckbox } from "../Checked";
 
 const input = () => {
   const classes = useStyles();

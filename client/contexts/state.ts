@@ -7,4 +7,5 @@ export const initialState: InitialProps = {
   screenSize: null,
   isSidebarOpen: false,
   loginDetails: null,
+  allTodos: null
 };

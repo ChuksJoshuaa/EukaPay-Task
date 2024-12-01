@@ -2,9 +2,11 @@ import {
   API_URL,
   CREATE_URL,
   DELETE_URL,
+  FETCH_ALL_TODO_URL,
+  FETCH_USER_TODO_URL,
   SIGNIN_URL,
   SIGNUP_URL,
-  UPDATE_URL,
+  UPDATE_URL
 } from "@/constants";
 import { AuthState, TodoProps } from "@/interface";
 import { getToken } from "@/utils/localStorage";
@@ -74,6 +76,45 @@ export const updateTodo = async (id: string, FormData: TodoProps) => {
 export const deleteTodo = async (id: string) => {
   try {
     const response = await API.delete(`${DELETE_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { error: error.response?.data || "An error occurred" };
+    } else {
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+export const fetchAllTodos = async () => {
+  try {
+    const response = await API.get(FETCH_ALL_TODO_URL); 
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { error: error.response?.data || "An error occurred" };
+    } else {
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+export const fetchAllUserTodos = async () => {
+  try {
+    const response = await API.get(FETCH_USER_TODO_URL); 
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { error: error.response?.data || "An error occurred" };
+    } else {
+      return { error: "An unexpected error occurred" };
+    }
+  }
+};
+
+export const fetchUserSingleTodo = async (id: string) => {
+  try {
+    const response = await API.get(`${FETCH_USER_TODO_URL}/${id}`); 
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

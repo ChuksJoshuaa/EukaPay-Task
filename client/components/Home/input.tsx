@@ -22,7 +22,8 @@ const input = () => {
     setDueDate,
     title,
     loading,
-    handleSubmit
+    handleSubmit,
+    EmptyData
   } = useInput();
 
   return (
@@ -97,15 +98,33 @@ const input = () => {
           </Box>
         </Box>
 
-        <Box mt={2}>
+        <Box mt={2} display="flex" justifyContent="space-between" gap={5}>
           <LoadingButton
             type="button"
+            variant="outlined"
+            color="inherit"
             fullWidth
+            disabled={!title}
+            onClick={EmptyData}
+          >
+            <Typography
+              variant="body1"
+              textTransform={"capitalize"}
+              lineHeight={2}
+              fontWeight={600}
+            >
+              Cancel
+            </Typography>
+          </LoadingButton>
+
+          <LoadingButton
+            type="button"
             variant="contained"
             color="primary"
+            fullWidth
             className={classes.submit}
             disabled={
-              !title || !(doneChecked || unfinishedChecked)
+              !title
             }
             loading={loading}
             onClick={handleSubmit}

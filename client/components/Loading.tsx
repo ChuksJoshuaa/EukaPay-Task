@@ -13,7 +13,7 @@ export default function Loading() {
         marginTop: "5em",
       }}
     >
-      <CircularProgress size={40} color={"secondary"} />
+      <CircularProgress size={40} color={"primary"} />
     </Box>
   );
 }

@@ -32,6 +32,13 @@ const useInput = () => {
     setTitle(value);
   };
 
+  const EmptyData = () => {
+    setTitle("");
+    setDoneChecked(false);
+    setUnfinishedChecked(false);
+    setDueDate(null);
+  }
+
   const handleDoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDoneChecked(event.target.checked);
     if (event.target.checked) {
@@ -192,6 +199,7 @@ const useInput = () => {
     handleEdit,
     handleFetchTodoById,
     handleUpdate,
+    EmptyData
   };
 };
 

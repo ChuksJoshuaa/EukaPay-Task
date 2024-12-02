@@ -6,7 +6,7 @@ export const AUTH = "AUTH";
 export const FETCH_ALL_TODO = "FETCH_ALL_TODO"
 export const SINGLE_TODO = "SINGLE_TODO"
 export const API_URL =
-  process.env.NEXT_PUBLIC_NODE_ENV !== "development"
+  process.env.NEXT_PUBLIC_NODE_ENV === "development"
     ? process.env.NEXT_PUBLIC_LOCAL_API_URL
     : process.env.NEXT_PUBLIC_LIVE_API_URL;
 export const SIGNUP_URL = `${API_URL}/api/v1/user/register`;

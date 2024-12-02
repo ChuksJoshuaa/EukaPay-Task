@@ -29,6 +29,11 @@ The API is designed to handle the following endpoints:
 - `DELETE /api/v1/todos/delete/:id`: Delete a todo created by a user.
 - `DATCH /api/v1/todos/update/:id`: Edit a todo created by a user.
 
+
+## API Link
+
+Access the live api url at [Project-Link]https://eukapay-todo.onrender.com)
+
 #### Database Connection
 
 1. Import connect.js

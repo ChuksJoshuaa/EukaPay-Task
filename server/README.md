@@ -32,7 +32,7 @@ The API is designed to handle the following endpoints:
 
 ## API Link
 
-Access the live api url at [Project-Link]https://eukapay-todo.onrender.com)
+Access the live site at [Project-Link](https://eukapay-todo.onrender.com/)
 
 #### Database Connection
 

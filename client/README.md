@@ -24,7 +24,7 @@ This is a full stack application built with Next.js and Node.js that allows you 
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/name.git`
+1. Clone the repository: `git clone https://github.com/ChuksJoshuaa/EukaPay-Task.git`
 2. Navigate to the project directory: `cd client`
 3. Install dependencies: `npm install`
 

@@ -32,6 +32,7 @@ export default makeStyles((theme: Theme) => ({
     display: "flex",
     justifyContent: "flex-end",
     width: "400px",
+    backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
       width: "auto",
     },
@@ -41,6 +42,7 @@ export default makeStyles((theme: Theme) => ({
     justifyContent: "space-between",
     width: "400px",
     alignItems: "center",
+    backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
       width: "auto",
       marginTop: 20,

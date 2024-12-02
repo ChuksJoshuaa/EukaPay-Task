@@ -1,7 +1,7 @@
 "use client";
 
 import HomeView from "@/components/Home";
-import InputView from "@/components/Home/input";
+import InputView from "@/components/Home/InputView";
 import useStyles from "@/components/Home/styles";
 import Layout from "@/components/Layout";
 import { Grid } from "@material-ui/core";

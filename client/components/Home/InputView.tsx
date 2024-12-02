@@ -10,7 +10,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
 
-const input = () => {
+const InputView = () => {
   const classes = useStyles();
   const {
     handleChange,
@@ -23,7 +23,7 @@ const input = () => {
     title,
     loading,
     handleSubmit,
-    EmptyData
+    EmptyData,
   } = useInput();
 
   return (
@@ -123,9 +123,7 @@ const input = () => {
             color="primary"
             fullWidth
             className={classes.submit}
-            disabled={
-              !title
-            }
+            disabled={!title}
             loading={loading}
             onClick={handleSubmit}
           >
@@ -144,4 +142,4 @@ const input = () => {
   );
 };
 
-export default input;
+export default InputView;

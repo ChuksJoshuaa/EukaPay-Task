@@ -199,7 +199,8 @@ const useInput = () => {
     handleEdit,
     handleFetchTodoById,
     handleUpdate,
-    EmptyData
+    EmptyData,
+    router
   };
 };
 

@@ -1,4 +1,4 @@
-# ToDo Application
+# Todo Application
 
 <img src="https://res.cloudinary.com/chuksmbanaso/image/upload/v1733135580/Screenshot_2024-12-02_at_11.32.06_mmar99.png" title="Image" alt="image">
 

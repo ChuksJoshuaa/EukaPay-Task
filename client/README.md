@@ -30,7 +30,14 @@ This is a full stack application built with Next.js and Node.js that allows you 
 
 ## Configuration
 
-1. You don't need any configuration to run the project
+1. You don't need any configuration to run the project.
+2. Set the following environment variables in your `.env` file:
+
+   ```plaintext
+   NEXT_PUBLIC_LIVE_API_URL=https://eukapay-todo.onrender.com
+   NEXT_PUBLIC_LOCAL_API_URL=https://localhost:5000
+   NEXT_PUBLIC_NODE_ENV=development
+   ```
 
 ## Folder Structure
 

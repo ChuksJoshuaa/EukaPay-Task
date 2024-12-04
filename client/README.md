@@ -45,7 +45,6 @@ This is a full stack application built with Next.js and Node.js that allows you 
 ├── app/ # Next.js pages and layouts
 ├── api/ # API routes
 ├── utils/ # Utility functions
-├── tests/ # Unit tests
 ├── contexts/ # Context API providers
 ├── reducers/ # React reducers and functionality
 

@@ -6,7 +6,6 @@ This is a full stack application built with Next.js and Node.js that allows you 
 
 - Input and display todo information
 - Styling using Material UI
-- Unit tests for components validation
 
 ## Prerequisites
 
